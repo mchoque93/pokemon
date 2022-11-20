@@ -17,3 +17,5 @@ LISTA_TIPO=['bug', 'dragon', 'electric', 'fighting', 'fire', 'flying', 'ghost', 
 URL_BASE= "https://serebii.net/"
 
 DIRECTORIO = os.path.dirname(os.path.dirname(__file__))
+
+RUTA_SAVE= "/home/marta/PycharmProjects/pokemon/"

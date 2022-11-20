@@ -12,3 +12,15 @@ class Tipos(ma.Schema):
 class PokemonSchema(ma.Schema):
     name = fields.String(required=False)
     tipos = fields.String(required=False, many=True)
+
+
+class PokemonRecommendadorSchema(ma.Schema):
+    pokemon_id = fields.Integer(required=False)
+    pokemon_id = fields.Integer(required=False)
+    name = fields.String(required=False)
+    hp = fields.Integer(required=False)
+    attack = fields.Integer(required=False)
+    defense = fields.Integer(required=False)
+    special = fields.Integer(required=False)
+    speed = fields.Integer(required=False)
+    tipos = fields.String(required=False, many=True)
