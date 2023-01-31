@@ -1,8 +1,10 @@
 from typing import TYPE_CHECKING, List
 
+from app.api.repositories.memory_pokemon_repository import MemoryPokemonRepository
 from app.models.models import Attack
 from app.models.services.serabii_loader import get_soup
 
+memory=MemoryPokemonRepository()
 if TYPE_CHECKING:
     from app.models.models import Tipo
 
@@ -22,4 +24,4 @@ def scrape_attack_type_page(tipo: "Tipo") -> List[str]:
 def load_attacks_by_tipo(tipo: "Tipo"):
     lista_ataques_tipo = scrape_attack_type_page(tipo)
     for attack_name in lista_ataques_tipo:
-        Attack.add_attack(attack_name, tipo)
+        memory.add_attack(attack_name, tipo)

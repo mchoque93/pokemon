@@ -29,7 +29,7 @@ def get():
     Tipos pokemon
     :return:
     """
-    tipo = memory.get_all(Tipo)
+    tipo = memory.get_all_tipos()
     result = tipo_schema.dump(tipo, many=True)
     return result
 

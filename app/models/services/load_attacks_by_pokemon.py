@@ -1,6 +1,7 @@
 from typing import TYPE_CHECKING, List
 
-from app.models.models import Association, Attack, db
+from app.models.models import Attack
+from app.models.orm import db
 from app.models.services.serabii_loader import get_soup
 if TYPE_CHECKING:
     from app.models.models import Pokemon
@@ -20,8 +21,8 @@ def scrape_pokedex_ataque(pokemon: "Pokemon")-> List["str"]:
 
 def load_attacks_by_pokemon(pokemon: "Pokemon"):
     lista_ataques = scrape_pokedex_ataque(pokemon)
-    for ataque in set(lista_ataques):
-        ataque_id = db.session.query(Attack).filter_by(name=ataque).first()
-        associate_table = Association(pokemon_id=pokemon.id, ataque_id=ataque_id.id)
-        db.session.add(associate_table)
-        db.session.commit()
+    for ataque_name in set(lista_ataques):
+        ataque = db.session.query(Attack).filter_by(name=ataque_name).first()
+        pokemon.attacks.append(ataque)
+    db.session.add(pokemon)
+    db.session.commit()
