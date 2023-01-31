@@ -3,8 +3,9 @@ import os
 from apiflask import APIFlask
 from app.api.resources import pokemon_v1_0_bp
 from app.fill_tables import fill_pokemon_tables
-from app.models.models import db, Pokemon
+from app.models.models import Pokemon
 from app.models.ext import ma, migrate
+from app.models.orm import start_mappers, db
 
 
 def create_app():
@@ -15,6 +16,8 @@ def create_app():
     # Inicializa las extensiones
     with app.app_context():
         db.init_app(app)
+        start_mappers()
+        db.drop_all()
         db.create_all()
 
         if db.session.query(Pokemon).first() is None:
